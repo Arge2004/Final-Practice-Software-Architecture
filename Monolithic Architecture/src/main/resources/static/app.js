@@ -78,8 +78,11 @@ function copyToClipboard(event) {
     shortUrlInput.select();
     shortUrlInput.setSelectionRange(0, 99999); // Para móviles
     
-    navigator.clipboard.writeText(shortUrlInput.value)
-        .then(() => {
+    try {
+        // Método compatible con HTTP (no requiere HTTPS)
+        const successful = document.execCommand('copy');
+        
+        if (successful) {
             // Cambiar texto del botón temporalmente
             const btn = event.target;
             const originalText = btn.textContent;
@@ -90,10 +93,12 @@ function copyToClipboard(event) {
                 btn.textContent = originalText;
                 btn.style.backgroundColor = '';
             }, 2000);
-        })
-        .catch(err => {
-            alert('Error al copiar: ' + err);
-        });
+        } else {
+            alert('No se pudo copiar. Por favor, copia manualmente.');
+        }
+    } catch (err) {
+        alert('Error al copiar. Por favor, copia manualmente.');
+    }
 }
 
 // Función para eliminar URL
