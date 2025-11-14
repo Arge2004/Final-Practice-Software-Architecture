@@ -1,0 +1,47 @@
+# Básico .gitignore - archivos comunes a ignorar
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Editores / IDEs
+.vscode/
+.idea/
+*.swp
+*~
+
+# Dependencias
+node_modules/
+vendor/
+
+# Archivos de entorno / secretos
+.env
+.env.local
+
+# Archivos de build / distribución
+dist/
+build/
+out/
+target/
+bin/
+obj/
+
+# Logs y runtime
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# Java / JVM
+*.class
+*.jar
+
+# Cobertura / caches
+coverage/
+.coverage
+.nyc_output/
