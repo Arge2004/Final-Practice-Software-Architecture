@@ -1,5 +1,7 @@
 package com.urlshortener.api.dto;
 
+import java.time.LocalDateTime;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,4 +20,8 @@ public class UrlStatsResponse {
     @Schema(description = "El número de veces que se ha accedido a la URL corta.",
             example = "42")
     private Long accessCount;
+
+    @Schema(description = "La fecha y hora de creación de la URL corta.",
+            example = "2025-11-14T17:30:00")
+    private LocalDateTime createdAt;
 }

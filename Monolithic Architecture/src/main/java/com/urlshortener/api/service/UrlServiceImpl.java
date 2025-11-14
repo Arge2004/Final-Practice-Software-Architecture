@@ -1,13 +1,15 @@
 package com.urlshortener.api.service;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.stereotype.Service;
+
 import com.urlshortener.api.dto.UrlCreateRequest;
 import com.urlshortener.api.dto.UrlStatsResponse;
 import com.urlshortener.api.entity.UrlMapping;
 import com.urlshortener.api.exception.UrlNotFoundException;
 import com.urlshortener.api.repository.UrlRepository;
+
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -38,6 +40,7 @@ public class UrlServiceImpl implements UrlService {
         statsResponse.setOriginalUrl(urlMapping.getOriginalUrl());
         statsResponse.setShortCode(urlMapping.getShortCode());
         statsResponse.setAccessCount(urlMapping.getAccessCount());
+        statsResponse.setCreatedAt(urlMapping.getCreationDate());
         return statsResponse;
     }
 

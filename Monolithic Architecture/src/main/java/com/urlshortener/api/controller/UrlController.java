@@ -1,19 +1,26 @@
 package com.urlshortener.api.controller;
 
+import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.urlshortener.api.dto.UrlCreateRequest;
 import com.urlshortener.api.dto.UrlStatsResponse;
 import com.urlshortener.api.entity.UrlMapping;
 import com.urlshortener.api.service.UrlService;
+
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
 
 
 @RestController
@@ -33,7 +40,7 @@ public class UrlController {
         return ResponseEntity.status(HttpStatus.CREATED).body(shortUrl);
     }
 
-    @GetMapping("/{shortCode}")
+    @GetMapping("/{shortCode:[a-zA-Z0-9_-]+}")
     public void redirectToOriginalUrl(@PathVariable String shortCode, HttpServletResponse response) throws IOException {
         UrlMapping urlMapping = urlService.getOriginalUrl(shortCode);
         response.sendRedirect(urlMapping.getOriginalUrl());

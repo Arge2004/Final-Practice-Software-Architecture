@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔗 URL Shortener</h1>
+            <p>Acorta tus URLs de forma rápida y sencilla</p>
+        </header>
+
+        <main>
+            <!-- Formulario para crear URL corta -->
+            <section class="create-section">
+                <h2>Crear URL Corta</h2>
+                <form id="createForm">
+                    <div class="form-group">
+                        <label for="originalUrl">URL Original:</label>
+                        <input 
+                            type="url" 
+                            id="originalUrl" 
+                            name="originalUrl" 
+                            placeholder="https://ejemplo.com/mi-url-muy-larga"
+                            required
+                        >
+                    </div>
+                    <button type="submit" class="btn btn-primary">Acortar URL</button>
+                </form>
+
+                <div id="resultSection" class="result-section" style="display: none;">
+                    <h3>✅ URL Creada</h3>
+                    <div class="url-display">
+                        <input type="text" id="shortUrlDisplay" readonly>
+                        <button class="btn btn-copy" onclick="copyToClipboard(event)">📋 Copiar</button>
+                    </div>
+                </div>
+
+                <div id="errorSection" class="error-section" style="display: none;">
+                    <p id="errorMessage"></p>
+                </div>
+            </section>
+
+            <!-- Sección para consultar estadísticas -->
+            <section class="stats-section">
+                <h2>Consultar Estadísticas</h2>
+                <form id="statsForm">
+                    <div class="form-group">
+                        <label for="shortCode">Código Corto:</label>
+                        <input 
+                            type="text" 
+                            id="shortCode" 
+                            name="shortCode" 
+                            placeholder="abc123"
+                            required
+                        >
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Obtener Estadísticas</button>
+                </form>
+
+                <div id="statsDisplay" class="stats-display" style="display: none;">
+                    <h3>📊 Estadísticas</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="stat-label">URL Original:</span>
+                            <span class="stat-value" id="statOriginalUrl"></span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-label">Código Corto:</span>
+                            <span class="stat-value" id="statShortCode"></span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-label">Visitas:</span>
+                            <span class="stat-value" id="statVisits"></span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-label">Fecha de Creación:</span>
+                            <span class="stat-value" id="statCreatedAt"></span>
+                        </div>
+                    </div>
+                    <button class="btn btn-danger" onclick="deleteUrl()">🗑️ Eliminar URL</button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>URL Shortener - Arquitectura Monolítica</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
