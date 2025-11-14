@@ -45,5 +45,4 @@ venv/
 coverage/
 .coverage
 .nyc_output/
-
 HELP.md
