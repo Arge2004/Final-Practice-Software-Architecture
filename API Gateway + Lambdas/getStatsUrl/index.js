@@ -15,24 +15,39 @@ exports.handler = async (event) => {
   try {
     const db = await connectToDatabase();
     
-    // Obtener estadísticas
-    const totalUrls = await db.collection('urls').countDocuments();
-    const totalClicks = await db.collection('urls').aggregate([
-      { $group: { _id: null, total: { $sum: '$clicks' } } }
-    ]).toArray();
+    // Obtener el código de la URL desde path parameters
+    const shortCode = event.pathParameters?.code;
     
-    const stats = {
-      totalUrls,
-      totalClicks: totalClicks[0]?.total || 0
-    };
+    if (!shortCode) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: 'Code is required' })
+      };
+    }
     
+    // Buscar la URL por código
+    const url = await db.collection('urls').findOne({ shortCode });
+    
+    if (!url) {
+      return {
+        statusCode: 404,
+        body: JSON.stringify({ error: 'URL not found' })
+      };
+    }
+    
+    // Retornar estadísticas
     return {
       statusCode: 200,
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
       },
-      body: JSON.stringify(stats)
+      body: JSON.stringify({
+        shortCode: url.shortCode,
+        originalUrl: url.originalUrl,
+        clicks: url.clicks,
+        createdAt: url.createdAt
+      })
     };
     
   } catch (error) {
