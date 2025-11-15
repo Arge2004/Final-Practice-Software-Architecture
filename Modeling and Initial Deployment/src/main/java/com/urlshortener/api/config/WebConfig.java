@@ -10,7 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Aplica esta configuración a todos los endpoints de tu API
-                .allowedOrigins("http://localhost:4321", "https://arge2004.github.io") //
+                .allowedOrigins("http://localhost:4321", "http://d32ixjcppli3yd.cloudfront.net") //
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos HTTP permitidos
                 .allowedHeaders("*") // Permite todas las cabeceras
                 .allowCredentials(true); // Permite el envío de cookies y credenciales
