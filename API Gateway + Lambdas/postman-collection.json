@@ -1,0 +1,105 @@
+{
+  "info": {
+    "name": "URL Shortener API - Lambda",
+    "description": "Serverless URL shortener using AWS Lambda and API Gateway",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Short URL",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"originalUrl\": \"https://github.com\"\n}"
+        },
+        "url": {
+          "raw": "https://kzpv2tvu38.execute-api.us-east-2.amazonaws.com/prod/urls",
+          "protocol": "https",
+          "host": [
+            "kzpv2tvu38",
+            "execute-api",
+            "us-east-2",
+            "amazonaws",
+            "com"
+          ],
+          "path": [
+            "prod",
+            "urls"
+          ]
+        },
+        "description": "Creates a shortened URL from a long URL"
+      },
+      "response": []
+    },
+    {
+      "name": "Get URL Statistics",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://kzpv2tvu38.execute-api.us-east-2.amazonaws.com/prod/stats/:code",
+          "protocol": "https",
+          "host": [
+            "kzpv2tvu38",
+            "execute-api",
+            "us-east-2",
+            "amazonaws",
+            "com"
+          ],
+          "path": [
+            "prod",
+            "stats",
+            ":code"
+          ],
+          "variable": [
+            {
+              "key": "code",
+              "value": "w0zhse",
+              "description": "Short code of the URL"
+            }
+          ]
+        },
+        "description": "Retrieve statistics for a specific shortened URL including click count"
+      },
+      "response": []
+    },
+    {
+      "name": "Redirect to Original URL",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://kzpv2tvu38.execute-api.us-east-2.amazonaws.com/prod/:code",
+          "protocol": "https",
+          "host": [
+            "kzpv2tvu38",
+            "execute-api",
+            "us-east-2",
+            "amazonaws",
+            "com"
+          ],
+          "path": [
+            "prod",
+            ":code"
+          ],
+          "variable": [
+            {
+              "key": "code",
+              "value": "lw2emk",
+              "description": "Short code of the URL"
+            }
+          ]
+        },
+        "description": "Redirects to the original URL and increments the click counter (302 redirect)"
+      },
+      "response": []
+    }
+  ]
+}
