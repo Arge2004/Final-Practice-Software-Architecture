@@ -12,19 +12,19 @@ const api = axios.create({
 export const urlService = {
   // Crear una URL corta
   createShortUrl: async (originalUrl) => {
-    const response = await api.post('/api/urls', { originalUrl });
+    const response = await api.post('/urls', { originalUrl });
     return response.data;
   },
 
   // Obtener estadísticas de una URL corta
   getUrlStats: async (shortCode) => {
-    const response = await api.get(`/api/urls/${shortCode}`);
+    const response = await api.get(`/urls/${shortCode}`);
     return response.data;
   },
 
   // Eliminar una URL corta
   deleteUrl: async (shortCode) => {
-    await api.delete(`/api/urls/${shortCode}`);
+    await api.delete(`/urls/${shortCode}`);
   },
 
   // Extraer el shortCode de una URL completa
